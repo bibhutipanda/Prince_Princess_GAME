@@ -1,0 +1,505 @@
+	// Header files used:
+
+	#include<iostream.h>
+	#include<conio.h>
+	#include<dos.h>
+	#include<process.h>
+
+	// Functions used in this project:
+
+	void divline();
+	void frontpage();
+	void howtoplay();
+	void players();
+	void player(int &xx, int &yy,char face);
+	void target(int &a,int &b);
+	void funswitch(int &m, int &n,char p);
+	void chance();
+	void restriction(int &m, int &n);
+	void condition();
+	void chancecheck();
+	void eraselast(int u, int v);
+	void winner();
+	void gameexit();
+
+	// Variable declarations:
+
+	char t;			       	      // USER INPUT
+	int m,n;                              // GENERAL PLAYER COORDINATES
+	int ch=0;
+	int flag=0;
+	int x=62,y=13;                        // TARGET COORDINATES
+	int x1=54,y1=17;                      // PLAYER 1 COORDINATES
+	int x2=70,y2=17;                      // PLAYER 2 COORDINATES
+	int x3=70,y3=9;                       // PLAYER 3 COORDINATES
+	int x4=54,y4=9;                       // PLAYER 4 COORDINATES
+
+	char tar=char(2);                     // Target Icon
+	char p01=char(3);                     // Player 1 Icon
+	char p02=char(4);                     // Player 2 Icon
+	char p03=char(5);                     // Player 3 Icon
+	char p04=char(6);                     // Player 4 Icon
+
+	// Array declarations:
+
+	char player1[50];                     // PLAYER 1 NAME
+	char player2[50];                     // PLAYER 2 NAME
+	char player3[50];                     // PLAYER 3 NAME
+	char player4[50];                     // PLAYER 4 NAME
+
+	// Main Function:
+
+void main()
+	{
+	clrscr();                             // Clear Screen
+
+	// Front Page:
+
+	frontpage();                          // PRESENTATION STARTS
+
+	// Outlook:
+
+	divline();                            // Function call
+
+	cout<<"\nNAME: Bibhuti Panda (DEVELOPER)\n";
+
+	divline();                            // Function Call
+
+	cout<<"\n\t\t\t\t\t\tFirst GITHUB Project";
+	cout<<"\n\t\t\t\t\t\t========================";
+
+	// Interface:
+
+	gotoxy(30,24);
+	cout<<"PRESS `x' TO EXIT!! ";
+
+	// Input Window:
+
+	gotoxy(5,11);
+	cout<<"MOVES : ";
+	gotoxy(5,13);
+	cout<<ch;                            // INITIAL MOVES
+
+	gotoxy(1,5);
+	cout<<"___________________*";
+	gotoxy(5,15);
+	cout<<"INPUT : ";
+
+	// Grid Boundary:
+
+		for(int i=53,j=9;j<19;++j)    // Column line left
+			{
+			gotoxy(i,j);
+			cout<<char(179);
+			}
+		for(i=71,j=9;j<19;++j)        // Column line right
+			{
+			gotoxy(i,j);
+			cout<<char(179);
+			}
+		for(j=18,i=54;i<71;++i)       // Row down
+			{
+			gotoxy(i,j);
+			cout<<"_";
+			}
+		for(j=8,i=54;i<71;++i)        // Row up: Divider
+			{
+			gotoxy(i,j);
+			cout<<"_";
+			}
+
+	// Coordinates to move:
+
+		for(i=54; i<71; i=i+2)
+		for(j=9; j<18; ++j)
+			{
+			gotoxy(i,j);
+			cout<<".";            // PLACING COORDINATES
+			}
+
+	for(i=20,j=6;j<25; ++j)   	      // VERTICAL DIVISION LINE
+			{                     // For input window
+			gotoxy(i,j);
+			cout<<char(179);
+			}
+
+	// Start point:
+
+	gotoxy(x1,y1);
+	cout<<p01;
+	gotoxy(x2,y2);
+	cout<<p02;
+	gotoxy(x3,y3);
+	cout<<p03;
+	gotoxy(x4,y4);
+	cout<<p04;
+	gotoxy(x,y);
+	cout<<tar;
+
+	// Player Function call:              THE HERO PART OF MY CODING
+
+	gameplay:
+	p1:
+	player(x1,y1,p01);
+		chancecheck();
+		if(ch%4==0)
+		goto p1;
+	p2:
+	player(x2,y2,p02);
+		chancecheck();
+		if(ch%4==1)
+		goto p2;
+	p3:
+	player(x3,y3,p03);
+		chancecheck();
+		if(ch%4==2)
+		goto p3;
+	p4:
+	player(x4,y4,p04);
+		chancecheck();
+		if(ch%4==3)
+		goto p4;
+	goto gameplay;
+
+	}
+
+//_________________________Function Definitions____________________________//
+
+void divline()                                // Full width division line
+	{
+	for(int i=0; i<80; ++i)
+			{
+			cout<<"_";
+			}
+	}
+
+void frontpage()                              // PRESENTATION WINDOW
+	{
+	cout<<"\n\n\n          ";
+	cout<<"B ";
+	delay(300);           //DELAY FOR 0.3 SECOND
+	cout<<"I ";
+	delay(300);           //DELAY FOR 0.3 SECOND
+	cout<<"B ";
+	delay(300);           //DELAY FOR 0.3 SECOND
+	cout<<"H ";
+	delay(300);           //DELAY FOR 0.3 SECOND
+	cout<<"U ";
+	delay(300);           //DELAY FOR 0.3 SECOND
+	cout<<"T ";
+	delay(300);           //DELAY FOR 0.3 SECOND
+	cout<<"I       ";
+	delay(300);           //DELAY FOR 0.3 SECOND
+	cout<<"P ";
+	delay(300);           //DELAY FOR 0.3 SECOND
+	cout<<"A ";
+	delay(300);           //DELAY FOR 0.3 SECOND
+	cout<<"N ";
+	delay(300);           //DELAY FOR 0.3 SECOND
+	cout<<"D ";
+	delay(300);           //DELAY FOR 0.3 SECOND
+	cout<<"A       ";
+	delay(300);           //DELAY FOR 0.3 SECOND
+	cout<<"P ";
+	delay(300);           //DELAY FOR 0.3 SECOND
+	cout<<"R ";
+	delay(300);           //DELAY FOR 0.3 SECOND
+	cout<<"E ";
+	delay(300);           //DELAY FOR 0.3 SECOND
+	cout<<"S ";
+	delay(300);           //DELAY FOR 0.3 SECOND
+	cout<<"E ";
+	delay(300);           //DELAY FOR 0.3 SECOND
+	cout<<"N ";
+	delay(300);           //DELAY FOR 0.3 SECOND
+	cout<<"T ";
+	delay(300);           //DELAY FOR 0.3 SECOND
+	cout<<"S\n\n\n\n";
+	delay(300);           //DELAY FOR 0.3 SECOND
+
+	cout<<"\t\t          _______________________\n";
+	cout<<"\t\t          CATCH ME ("<<tar<<") IF YOU CAN\n";
+	cout<<"\t\t          _______________________\n\n\n";
+	cout<<"\tWELCOME!!\tWELCOME!!\tWELCOME!!\tWELCOME!!\n\n";
+
+	cout<<"\n\n\n\n\t\t     PRESS ENTER to read the RULES!!\n";
+	cout<<"\t\t                    ";
+	t=getch();
+	clrscr();                             // CLEAR SCREEN
+	howtoplay();                          // CALLING RULES WINDOW
+	}
+
+void howtoplay()                              // RULES WINDOW
+	{
+	cout<<"\n\tRULES: CATCH ME ("<<tar<<") IF YOU CAN\n";
+	cout<<"\n\t\t1. There are 4 PLAYERS and a TARGET: ";
+	cout<<"\n\t\t   PLAYER 1 = "<<p01;
+	cout<<"\tPLAYER 2 = "<<p02;
+	cout<<"\n\t\t   PLAYER 3 = "<<p03;
+	cout<<"\tPLAYER 4 = "<<p04;
+	cout<<"\tTARGET   = "<<tar;
+	cout<<"\n\n\t\t2. Moves are controlled by:        w ";
+	cout<<"\n\t\t     (case sensitive)            a s d\n";
+	cout<<"\n\t\t   a - LEFT\td - RIGHT\tw - UP\ts - DOWN.";
+	cout<<"\n\n\t\t3. If PLAYER moves FORWARD, TARGET moves BACKWARD,\n";
+	cout<<"\t\t   and If PLAYER moves UPWARD, TARGET moves DOWNWARD,\n";
+	cout<<"\t\t   and VICE-VERSA.";
+	cout<<"\n\n\t\t4. All PLAYERS play chance by chance to reach the TARGET.";
+	cout<<"\n\n\t\t5. The PLAYER who reaches first to the target, WINS.";
+	cout<<"\n\n\n\n\t\tPRESS ENTER to PLAY or `x' to EXIT: ";
+
+	t=getch();
+	if(t=='x')
+	exit(0);                              // EXIT APPLICATION
+	else
+	clrscr();                             // CLEAR SCREEN
+	players();                            // CALLING PLAYER REGISTRATION
+	}
+
+void players()                                // PLAYER REGISTRATION
+	{
+	cout<<"\n\t\t\tPLAYER REGISTRATION WINDOW";
+	cout<<"\n\t\t\t__________________________";
+	cout<<"\n\n\n\n";
+	cout<<"\t\tPlayer 1 NAME ("<<p01<<") : ";
+	cin.getline(player1,50);
+	cout<<"\n\t\tPlayer 2 NAME ("<<p02<<") : ";
+	cin.getline(player2,50);
+	cout<<"\n\t\tPlayer 3 NAME ("<<p03<<") : ";
+	cin.getline(player3,50);
+	cout<<"\n\t\tPlayer 4 NAME ("<<p04<<") : ";
+	cin.getline(player4,50);
+	cout<<"\n\n\n\t\t\t\tPLEASE WAIT..."; // ONLY FOR FEEL OF GAME
+	delay(1400);                          // DELAY 1.4 seconds
+	clrscr();                             // CLEAR SCREEN
+	}
+
+void player(int &xx, int &yy, char face)      // 4 PLAYER CONTROL
+	{
+	chancecheck();                        // CHECKING CHANCE
+	gotoxy(5,9);
+	cout<<"CHANCE: "<<face;               // PLACING CURRENT PLAYER ICON
+	gotoxy(xx,yy);
+	cout<<face;
+	funswitch(xx,yy,face);
+	}
+
+void funswitch(int &m, int &n, char p)        // Player operations
+	{
+	chance:
+	gotoxy(5,17);
+	chance();
+	switch(t)
+		{
+		case 'a':
+			{
+			eraselast(m,n);       // ERASING LAST PLACE
+			m=m-2;
+			}                     // Left movement
+			break;
+		case 's':
+			{                     // ERASING LAST PLACE
+			eraselast(m,n);
+			n=n+1;
+			}           	      // Down movement
+			break;
+		case 'd':
+			{                     // ERASING LAST PLACE
+			eraselast(m,n);
+			m=m+2;
+			}	     	      // Right movement
+			break;
+		case 'w':
+			{
+			eraselast(m,n);       // ERASING LAST PLACE
+			n=n-1;
+			}             	      // Up movement
+			break;
+		case 'x':exit(0);       // EXIT APPLICATION
+				break;
+		default:                      // DEFAULT
+			{
+			gotoxy(30,20);
+			cout<<"Enter correct key";
+			delay(400);
+			gotoxy(30,20);
+			cout<<"                 ";
+			ch=ch-1;
+			goto chance;
+			}
+		}
+
+	restriction(m,n);                     // CHECKING BOUNDARY CONDITION
+	if(flag==10)
+		{
+		gotoxy(m,n);                  // OLD COORDINATES
+		cout<<p;
+		}
+	else
+		{
+		gotoxy(m,n);                  // NEW COORDINATES
+		cout<<p;
+		}
+	winner();     			      // CHECKING WINNING CONDITION
+	}
+
+void target(int &x,int &y)                    //Target function
+	{
+		switch(t)
+			{
+			case 'a':x=x+2;       // COORDINATE UPDATE
+				break;        // RIGHT MOVEMENT
+			case 's':y=y-1;       // COORDINATE UPDATE
+				break;        // UP MOVEMENT
+			case 'd':x=x-2;       // COORDINATE UPDATE
+				break;        // LEFT MOVEMENT
+			case 'w':y=y+1;       // COORDINATE UPDATE
+				break;        // DOWN MOVEMENT
+			default:              // DEFAULT
+				{
+				gotoxy(1,18);
+				cout<<"Enter correct key";
+				delay(800);   // DELAY 0.8 SECOND
+				gotoxy(1,18);
+				cout<<"                 ";
+				gotoxy(5,17);
+				chance();
+				}
+			}
+
+	}
+
+void chancecheck()                            // CHECKS CHANCE
+	{
+	if(ch%4==1)
+		gotoxy(x1,y1);
+	if(ch%4==2)
+		gotoxy(x2,y2);
+	if(ch%4==3)
+		gotoxy(x3,y3);
+	if(ch%4==0)
+		gotoxy(x4,y4);
+	}
+
+void chance()                                 // Control input
+	{
+	ch++;
+	t=getch();
+	delay(100);
+	gotoxy(5,17);
+	cout<<" ";
+	gotoxy(5,13);
+	cout<<ch;
+	chancecheck();                        // CHECKING UPDATED CHANCE
+	}
+
+void restriction(int &m,int &n)               // To not cross boundary
+	{
+		if(m<54 || m>70)              // CHECKING X COORDINATE
+		     {
+		     gotoxy(m,n);
+		     cout<<" ";
+		     condition();             // BOUNDARY CONDITION
+		     target(m,n);
+		     flag=10;
+		     }
+
+		else if(n<9 || n>17)          // CHECKING Y COORDINATE
+		     {
+		     gotoxy(m,n);
+		     cout<<"_";
+		     condition();             // BOUNDARY CONDITION
+		     target(m,n);
+		     flag=10;
+		     }
+
+		else                          // BOUNDARY CONDITION FAILS
+		     {
+		     eraselast(x,y);
+		     target(x,y);
+		     gotoxy(x,y);
+		     cout<<tar;
+		     }
+	 }
+
+void condition()                              // BOUNDARY CONDITION
+	{
+	--ch;
+	gotoxy(5,13);
+	cout<<ch;
+	chancecheck();
+	gotoxy(30,20);
+			cout<<"BOUNDARY";
+	gotoxy(30,21);
+			cout<<"MOVE AGAIN";
+			delay(1000);
+	gotoxy(30,20);
+			cout<<"        ";
+	gotoxy(30,21);
+			cout<<"          ";
+	flag=10;
+	}
+
+void eraselast(int u, int v)                  // ERASE LAST COORDINATE
+	{
+	gotoxy(u,v);
+	cout<<".";
+	}
+
+void winner()                                 // WINNING CONDITION
+	{
+	if(x==x1)                             // PLAYER 1 WINNING CONDITION
+		{
+		if(y==y1)
+		flag=1;
+		if(flag==1)
+			{
+			gotoxy(30,20);
+			cout<<player1<<" WON!";
+			gameexit();
+			}
+		}
+
+	if(x==x2)                             // PLAYER 2 WINNING CONDITION
+		{
+		if(y==y2)
+		flag=2;
+		if(flag==2)
+			{
+			gotoxy(30,20);
+			cout<<player2<<" WON!";
+			gameexit();
+			}
+		}
+
+	if(x==x3)                             // PLAYER 3 WINNING CONDITION
+		{
+		if(y==y3)
+		flag=3;
+		if(flag==3)
+			{
+			gotoxy(30,20);
+			cout<<player3<<" WON!";
+			gameexit();
+			}
+		}
+	if(x==x4)                             // PLAYER 4 WINNING CONDITION
+		{
+		if(y==y4)
+		flag=4;
+		if(flag==4)
+			{
+			gotoxy(30,20);
+			cout<<player4<<" WON!";
+			gameexit();
+			}
+		}
+	}
+
+void gameexit()                               // CONGRATS TO WINNER AND EXIT
+	{
+	gotoxy(30,22);
+	cout<<"CONGRATS!!";
+	t=getch();
+	exit(0);
+	}
